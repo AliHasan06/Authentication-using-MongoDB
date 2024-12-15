@@ -40,22 +40,20 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.render("login");
+  res.render("login");
 });
 
 app.post("/login", async (req, res) => {
-    let user = await userModel.findOne({ email: req.body.email });
+  let user = await userModel.findOne({ email: req.body.email });
 
-    bcrypt.compare(req.body.password, user.password, (err, result) => {
-
-        if(result) res.send('yes you can login')
-            else res.send('Something went wrong')
-    });
+  bcrypt.compare(req.body.password, user.password, (err, result) => {
+    if (result) {
+      let token = jwt.sign({ email: user.email }, "secret");
+      res.cookie("token", token);
+      res.send("yes you can login");
+    } else res.send("Something went wrong");
+  });
 });
-
-
-
-
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
