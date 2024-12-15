@@ -38,13 +38,22 @@ app.post("/create", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login");
 });
-app.post("/login",async (req, res) => {
-let user = await userModel.findOne({ email: req.body.email });
-if(!user) return res.send( 401 );
 
-bcrypt.compare(req.body.password,)
-
+app.get("/login", (req, res) => {
+    res.render("login");
 });
+
+app.post("/login", async (req, res) => {
+    let user = await userModel.findOne({ email: req.body.email });
+
+    bcrypt.compare(req.body.password, user.password, (err, result) => {
+        console.log(result);
+    });
+});
+
+
+
+
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
