@@ -49,7 +49,7 @@ app.post("/login", async (req, res) => {
     bcrypt.compare(req.body.password, user.password, (err, result) => {
 
         if(result) res.send('yes you can login')
-            else res.send('you cant login')
+            else res.send('Something went wrong')
     });
 });
 
