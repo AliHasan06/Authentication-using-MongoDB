@@ -23,26 +23,25 @@ app.post("/create", (req, res) => {
       console.log(hash);
       let createdUser = await userModel.create({
         username,
-        password:hash,
+        password: hash,
         email,
         age,
       });
 
-let token = jwt.sign({email},'secret')
-res.cookie('token', token)
+      let token = jwt.sign({ email }, "secret");
+      res.cookie("token", token);
       res.send(createdUser);
     });
   });
 });
 
-app.post('/login', (req, res) => {
-    
-})
+app.post("/login", (req, res) => {
+  res.render("login");
+});
 
-
-app.get('/logout', (req, res) => {
-    res.clearCookie('token')
-    res.redirect('/')
-})
+app.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/");
+});
 
 app.listen(3000);
