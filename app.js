@@ -40,6 +40,10 @@ app.get("/login", (req, res) => {
 });
 app.post("/login",async (req, res) => {
 let user = await userModel.findOne({ email: req.body.email });
+if(!user) return res.send( 401 );
+
+bcrypt.compare(req.body.password,)
+
 });
 
 app.get("/logout", (req, res) => {
