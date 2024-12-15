@@ -15,5 +15,15 @@ app.use(express.static(path.join(__dirname, "public")));
  
 app.use(cookieParser());
 app.get("/", (req, res) => res.render("index"));
+app.post("/create", async (req, res) => {
+    let {username, password,email,age} = req.body;
+let createdUser = await userModel.create({
+    username,
+    password,
+    email,
+    age
+});
+});
+
 
 app.listen(3000);
