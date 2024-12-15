@@ -47,7 +47,9 @@ app.post("/login", async (req, res) => {
     let user = await userModel.findOne({ email: req.body.email });
 
     bcrypt.compare(req.body.password, user.password, (err, result) => {
-        console.log(result);
+
+        if(result) res.send('yes you can login')
+            else res.send('you cant login')
     });
 });
 
