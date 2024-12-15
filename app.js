@@ -35,9 +35,12 @@ app.post("/create", (req, res) => {
   });
 });
 
-app.post("/login", (req, res) => {
-  res.render("login");
-});
+app.get("/login", (req, res) => {
+    res.render("login");
+  });
+  app.post("/login", (req, res) => {
+    res.render("login");
+  });
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
